@@ -21,7 +21,7 @@ router.use('/', file.routes(), file.allowedMethods());
 app.use(router.routes()).use(router.allowedMethods());
 
 // 指定端口号并启动服务器监听
-let server = app.listen(3000, () => {
+let server = app.listen(3000, 'localhost', () => {
 	let host = server.address().address;
 	let port = server.address().port;
 	console.log('Express server listening on port http://%s:%s', host, port);
