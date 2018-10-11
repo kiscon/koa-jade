@@ -1,0 +1,44 @@
+doctype html
+html(lang="zh-cn")
+    head
+        //- meta声明
+        block head-meta
+            meta(charset='utf-8')
+            //link(rel="Shortcut Icon" href="/favicon.ico")
+            meta(name="renderer" content="webkit")
+            meta(name="force-rendering" content="webkit")
+            meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+            meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+        //- 标题声明
+        block head-area-title
+            title #{title}
+        //- 头部script执行
+        block head-area-script
+        //- 引入CSS区域
+        block head-area-baisc-css
+        block head-area-extra-css
+            link(rel='stylesheet', href='/css/file.css')
+    body
+        //- 主区域
+        block body-area-contents
+            table 
+                thead
+                    tr
+                        th 名称
+                        th.details 大小
+                        th.details 修改日期
+                tbody
+                    tr
+                        td 
+                            a.icon.up [上级目录]
+                        td.detailsColumn
+                        td.detailsColumn  
+                    if (list)
+                        each v, k in list
+                            tr
+                                td
+                                    a(class="icon #{v.isfile ?'file':'dir'}")=v.name
+                                td.detailsColumn=v.size
+                                td.detailsColumn=v.mtime
+        
+    
