@@ -1,8 +1,9 @@
-const Koa = require('koa')
 const path = require('path')
+const Koa = require('koa')
 const koaViews = require('koa-views')
 const koaStatic = require('koa-static')
-const file = require('./src/routes/file')
+const koaBody = require('koa-body')
+const indexRoute = require('./src/routes/index')
 const errHandler = require('./src/middleware/errHandler')
 const app = new Koa()
 
@@ -14,8 +15,11 @@ app.use(koaViews(path.join(__dirname, './src/views'), {
 // 托管静态资源
 app.use(koaStatic(path.join( __dirname,  './src/static')))
 
+// 代表我们上传的是文件
+app.use(koaBody({ multipart: true }))
+
 // 注册路由
-app.use(file.routes(), file.allowedMethods())
+indexRoute(app)
 
 // 错误中间件
 errHandler(app)

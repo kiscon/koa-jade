@@ -1,15 +1,5 @@
 # koa-jade
 
-## Project setup
-```
-yarn install
-```
-
-### 启动
-```
-node app.js
-```
-
 ### Koa
 Koa -- 基于 Node.js 平台的下一代 web 开发框架
 
@@ -22,7 +12,7 @@ Koa -- 基于 Node.js 平台的下一代 web 开发框架
 - async函数执行返回的也是一个promise对象
 - try-catch截获promise中reject的值
 
-### Koa2的Context对象
+### koa2的Context对象
 - Context将节点的请求和响应对象封装到单个对象中，该对象为编写Web应用程序和API提供了许多有用的方法。
 
 ### 中间件分析
