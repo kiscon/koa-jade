@@ -2,15 +2,29 @@ const moment = require('moment')
 const fs = require('fs')
 const path = require('path')
 
+
+//排序函数 如果前一个数 要放到 后一个数 前面，则return -1
+const compire = (x, y) => {
+	let n1 = x.name
+	let n2 = y.name
+	if (n1 < n2) {
+		return -1
+	} else {
+		return 1
+	}
+}
+
 /**
  * 读取文件函数
  * @param  {string} 文件本地的绝对路径
  * @return { Array }
  */
-function readFileListByPath(dirpath) {
+const readFileListByPath = dirpath =>{
 	return new Promise((resolve, reject) => {
 		// 存放所有文件信息对象的一个数组
-		let fileInfoList = [] , fileList = [] , dirList = []
+		let fileInfoList = []
+		let fileList = []
+		let dirList = []
 		let counter = 0
 		// 根据指定的路径，读取所有文件信息
 		fs.readdir(dirpath, (err, filenames) => {
@@ -28,13 +42,11 @@ function readFileListByPath(dirpath) {
 						isfile : stats.isFile()
 					}
 
-					// 将获取到的文件信息，push到数组中
 					stats.isFile() ? fileList.push(info) : dirList.push(info)
 
 					counter++
 					// 当 counter 值等于 filenames 的长度的时候，表示所有的文件信息已经获取完毕了
 					if (counter === filenames.length) {
-						// 在concat之前，先对 dirList 和 fileList 分别进行排序
 						dirList.sort(compire)
 						fileList.sort(compire)
 						fileInfoList = dirList.concat(fileList)
@@ -44,20 +56,6 @@ function readFileListByPath(dirpath) {
 			})
 		})
 	})
-
 }
-
-
-//排序函数 如果前一个数 要放到 后一个数 前面，则return -1
-function compire(x, y) {
-	let n1 = x.name
-	let n2 = y.name
-	if (n1 < n2) {
-		return -1
-	} else {
-		return 1
-	}
-}
-
 
 module.exports = readFileListByPath

@@ -29,7 +29,12 @@ Koa -- 基于 Node.js 平台的下一代 web 开发框架
 - app.use 用来注册中间件，先收集起来
 - 实现next机制，即上一个通过next触发下一个
 - 不涉及method和path的判断
-- 
+
+### error事件的监听
+- app.on('error')
+- ctx.app.emit('error')
+- 继承自nodejs中event对象下的eventEmit
+
 ### 参考学习资料
 https://chenshenhai.github.io/koa2-note/
 
